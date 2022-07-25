@@ -1,0 +1,12 @@
+aiogram~=2.18
+aioredis~=2.0
+environs~=9.0
+asyncpg
+aiohttp==3.8.1
+python-dotenv
+sqlalchemy==1.4.39
+gino
+asgiref
+django==4.0.6
+psycopg2-binary
+jsonfield
