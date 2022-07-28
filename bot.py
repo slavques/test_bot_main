@@ -8,8 +8,8 @@ from aiogram.contrib.fsm_storage.redis import RedisStorage2
 
 from tgbot.config import load_config
 from tgbot.filters.admin import AdminFilter
-from tgbot.handlers.admin import register_admin
-from tgbot.handlers.echo import register_echo
+# from tgbot.handlers.admin import register_admin
+# from tgbot.handlers.echo import register_echo
 from tgbot.handlers.user import register_user
 from tgbot.middlewares.db import DbMiddleware
 
@@ -25,10 +25,17 @@ def register_all_filters(dp):
 
 
 def register_all_handlers(dp):
-    register_admin(dp)
+    # register_admin(dp)
     register_user(dp)
 
-    register_echo(dp)
+    # register_echo(dp)
+
+
+def check_sub_channel(chat_member):
+    if chat_member['status'] != 'left':
+        return True
+    else:
+        return False
 
 
 def setup_django():
@@ -69,6 +76,7 @@ async def main():
 
 if __name__ == '__main__':
     import django
+
     setup_django()
     try:
         asyncio.run(main())

@@ -47,7 +47,7 @@ def get_categories() -> List[Item]:
 
 
 @sync_to_async
-def get_categories(category_code=None) -> List[Item]:
+def get_subcategories(category_code=None) -> List[Item]:
     return Item.objects.distinct("subcategory_name").filter(category_code=category_code).all()
 
 
