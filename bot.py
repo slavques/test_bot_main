@@ -8,9 +8,10 @@ from aiogram.contrib.fsm_storage.redis import RedisStorage2
 
 from tgbot.config import load_config
 from tgbot.filters.admin import AdminFilter
-# from tgbot.handlers.admin import register_admin
 # from tgbot.handlers.echo import register_echo
+from tgbot.handlers.menu import menu_main
 from tgbot.handlers.user import register_user
+# from tgbot.handlers.user import register_admin
 from tgbot.middlewares.db import DbMiddleware
 
 logger = logging.getLogger(__name__)
@@ -25,17 +26,12 @@ def register_all_filters(dp):
 
 
 def register_all_handlers(dp):
-    # register_admin(dp)
     register_user(dp)
+    menu_main(dp)
 
-    # register_echo(dp)
 
-
-def check_sub_channel(chat_member):
-    if chat_member['status'] != 'left':
-        return True
-    else:
-        return False
+# register_echo(dp)
+# register_admin(dp)
 
 
 def setup_django():
