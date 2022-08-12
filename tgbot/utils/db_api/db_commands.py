@@ -1,6 +1,6 @@
 from typing import List
 
-from django_project.usersmanage.models import Item, User
+from django_project.usersmanage.models import Item, User, FAQ
 from asgiref.sync import sync_to_async
 
 
@@ -25,7 +25,7 @@ def select_all_users():
 
 
 @sync_to_async()
-def dolbaeb(user_id):
+def ref_related(user_id):
     user = User.objects.get(id=user_id)
     referral = user.referral
 
@@ -63,3 +63,12 @@ def count_items(category_code, subcategory_code=None) -> int:
 @sync_to_async
 def get_item(item_id) -> Item:
     return Item.objects.filter(id=int(item_id)).count()
+
+@sync_to_async
+def get_all_faq():
+    return FAQ.objects.all()
+
+@sync_to_async
+def get_answer_id(faq_id):
+    return FAQ.objects.filter(id=int(faq_id)).first()
+

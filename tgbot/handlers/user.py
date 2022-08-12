@@ -3,7 +3,7 @@ from aiogram.types import Message
 from aiogram.utils.markdown import hlink
 
 from tgbot.keyboards import markups
-from tgbot.keyboards.catalog_kb import notsub_menu
+from tgbot.keyboards.catalog_kb2 import notsub_menu
 from tgbot.misc.check_sub import check_sub_channel
 from tgbot.utils.db_api import db_commands as commands
 
@@ -17,9 +17,12 @@ async def check_sub(message: Message):
                                                                      user_id=message.from_user.id)):
             await message.bot.send_message(message.from_user.id,
                                            'Привет! Ознакомиться с функционалом можно по команде \n/menu',
-                                           reply_markup=markups.profileKeyboard)
+                                           reply_markup=markups.menuBtn)
         else:
             await message.bot.send_message(message.from_user.id, NOTSUB_MESSAGE, reply_markup=notsub_menu)
+    user = await commands.add_user(user_id=message.from_user.id,
+                                   full_name=message.from_user.full_name,
+                                   username=message.from_user.username)
 
 
 async def subchanneldone(message: Message):
@@ -27,7 +30,7 @@ async def subchanneldone(message: Message):
     if await check_sub_channel(await message.bot.get_chat_member(chat_id=CHANNEL_ID, user_id=message.from_user.id)):
         await message.bot.send_message(message.from_user.id,
                                        'Привет! Ознакомиться с функционалом можно по команде \n/menu',
-                                       reply_markup=markups.profileKeyboard)
+                                       reply_markup=markups.menuBtn)
     else:
         await message.bot.send_message(message.from_user.id, NOTSUB_MESSAGE, reply_markup=notsub_menu)
 

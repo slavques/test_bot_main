@@ -50,10 +50,10 @@ class Item(TimeBasedModel):
     price = models.DecimalField(verbose_name="Цена", decimal_places=2, max_digits=8)
     description = models.TextField(verbose_name="Описание", max_length=3000, null=True)
 
-    category_code = models.CharField(verbose_name="Код категории", max_length=20)
-    category_name = models.CharField(verbose_name="Название категории", max_length=20)
-    subcategory_code = models.CharField(verbose_name="Код подкатегории", max_length=20)
-    subcategory_name = models.CharField(verbose_name="Название подкатегории", max_length=20)
+    category_code = models.CharField(verbose_name="Код категории", max_length=30)
+    category_name = models.CharField(verbose_name="Название категории", max_length=30)
+    subcategory_code = models.CharField(verbose_name="Код подкатегории", max_length=30)
+    subcategory_name = models.CharField(verbose_name="Название подкатегории", max_length=30)
 
     def __str__(self):
         return f"№{self.id} - {self.name}"
@@ -78,3 +78,22 @@ class Purchase(TimeBasedModel):
 
     def __str__(self):
         return f"№{self.id} = {self.item_id} ({self.quantity})"
+
+
+class FAQ(models.Model):
+    question = models.CharField(verbose_name="Вопрос", max_length=50)
+    answer = models.TextField(verbose_name="Ответ")
+
+    class Meta:
+        verbose_name = "Частозадаваемые вопросы"
+        verbose_name_plural = "Частозадаваемые вопросы"
+
+    def __str__(self):
+        return self.question[:30]
+
+
+class Catalog(models.Model):
+    class Meta:
+        verbose_name = "Каталог"
+        verbose_name_plural = "Каталоги"
+

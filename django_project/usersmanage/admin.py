@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, Item, Purchase, Referral
+from .models import User, Item, Purchase, Referral, FAQ
 
 
 @admin.register(User)
@@ -21,3 +21,12 @@ class ReferralAdmin(admin.ModelAdmin):
 @admin.register(Purchase)
 class PurchaseAdmin(admin.ModelAdmin):
     list_display = ("id", "buyer", "item_id", "quantity", "receiver", "successful")
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ("id", "question", "answer")
+    list_display_links = ("id","question")
+    list_editable = ("answer",)
+    empty_value_display = "пусто"
+    search_fields = ("question",)
+    list_filter = ("question",)
